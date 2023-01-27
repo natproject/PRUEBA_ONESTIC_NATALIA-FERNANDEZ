@@ -24,7 +24,7 @@ export class ListComponent {
       }
       for (let i = 0; i < this.pokemonsUrl.length; i++) {
         let image = this.pokemonsUrl[i].split("/");
-        this.pokemonsImg.push("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + image[6] + ".png");
+        this.pokemonsImg.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${image[6]}.png`);
       }
       this.arrayPokemons = [
         [{ img: this.pokemonsImg[0], namePokemon: this.pokemonsName[0] }, { img: this.pokemonsImg[1], namePokemon: this.pokemonsName[1] }, { img: this.pokemonsImg[2], namePokemon: this.pokemonsName[2] }, { img: this.pokemonsImg[3], namePokemon: this.pokemonsName[3] }],
