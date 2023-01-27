@@ -1,0 +1,12 @@
+h1, h4{
+    font-family: 'Raleway', sans-serif !important;
+}
+h1{
+    font-weight: bold;
+}
+#res{
+    font-family: 'VT323', monospace !important;
+    font-size: 2rem !important;
+    font-weight:normal;
+}
+

@@ -1,44 +1,69 @@
-<div class="container mt-3">
+<div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row mt-2">
                         <div class="col-6">
-                            <h2 class="text-capitalize">{{id}} - {{name}}</h2>
+                            <h1 class="text-capitalize">{{id}} - {{name}}</h1>
                         </div>
                         <div class="col-6">
                             <div class="text-end">
                                 <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                <label class="btn btn-outline-warning" for="btn-check-outlined">Add to favorites <i class="fa-solid fa-star"></i></label><br>
+                                <label class="btn btn-outline-warning mt-2" for="btn-check-outlined">Add to favorites <i
+                                        class="fa-solid fa-star"></i></label><br>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-xl-5 col-md-12">
-                            <img
-                                src={{img}}>
+                    <div class="row text-center">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <img src={{img}}>
+                            </div>
                         </div>
-                        <div class="col-xl-7 col-md-12">
-                            <h5 class="card-title">Tipo:</h5>
-                            <p class="card-text">Planta</p>
-                            <h5 class="card-title">Puntos Exp.:</h5>
-                            <p class="card-text">10</p>
-                            <h5 class="card-title">Ataque:</h5>
-                            <p class="card-text">Planta</p>
-                            <h5 class="card-title">Defensa:</h5>
-                            <p class="card-text">Planta</p>
-                            <h5 class="card-title">Ataque especial:</h5>
-                            <p class="card-text">Planta</p>
+                        <div class="col-xl-6 text-center">
+                            <div class="card">
+                                <div class="margin mt-2">
+                                    <h4>
+                                        Type:<span id="res" *ngFor="let item of types; let i = index"> {{item}}{{i <
+                                                types.length - 1 ? ' & ' : '' }}</span>
+                                    </h4>
+                                    <h4 class="mb-4">Height: <span id="res"> {{height}}</span></h4>
+                                    <h4 class="mb-4">Weight: <span id="res"> {{weight}}</span></h4>
+                                    <h4 class="mb-4">Abilities:</h4>
+                                    <h4 class="mb-2">Base experience: <span id="res"> {{exp}}</span></h4>
+                                </div>
+                            </div>
+                            <div class="card mt-2">
+                                <div class="row text-center mt-2">
+                                    <div class="col-xl-6 mt-2">
+                                        <h4>Abilities:</h4>
+                                        <h4 *ngFor="let item of abilities" id="res">- {{item}}</h4>
+                                    </div>
+                                    <div class="col-xl-6 text-center mb-2">
+                                        <h4>Stats:</h4>
+                                        <h4>
+                                            <h4 id="res" *ngFor="let item of stats; let i = index">
+                                                <span *ngFor="let element of item; let j = index">
+                                                    {{element}}{{j < item.length - 1 ? ': ' : '' }} </span>
+                                            </h4>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-xl-12">
+                                <h4 class="text-capitalize">
+                                    {{name}} Sprites: <img id="res" *ngFor="let item of sprites" src="{{item}}">
+                                </h4>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

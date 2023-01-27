@@ -18,6 +18,8 @@ export class DetailComponent {
   public stats: string[][] = []
   public types: string[] = []
   public img: string = "";
+  public sprites: string[] = [];
+  
   constructor(private route: ActivatedRoute, public service: DataService) { 
   }
 
@@ -34,14 +36,14 @@ export class DetailComponent {
       this.height = response.height;
       this.weight = response.weight;
       let statsRes = response.stats;
-
       for (let i = 0; i < statsRes.length; i++) {
-        this.stats.push([statsRes[i].base_stat.toString() , statsRes[i].stat.name]);
+        this.stats.push([statsRes[i].stat.name.toUpperCase(), statsRes[i].base_stat.toString()]);
       }
       let typeRes = response.types;
       for (let i = 0; i < typeRes.length; i++) {
         this.types.push(typeRes[i].type.name);
       }
+      this.sprites = [response.sprites.front_default, response.sprites.back_default, response.sprites.front_shiny, response.sprites.back_shiny]
       this.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.id}.png`;
     })
     

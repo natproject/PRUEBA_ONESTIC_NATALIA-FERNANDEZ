@@ -35,9 +35,4 @@ export class ListComponent {
       ]
     })
   }
-
-  public showDetail(name:string){
-    
-  }
-
 }
