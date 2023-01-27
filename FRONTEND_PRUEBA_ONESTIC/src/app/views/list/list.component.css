@@ -1,0 +1,21 @@
+#button{
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    font-weight: bold !important;
+    color: white;
+    background-color:#385ba8;
+    border-width: 3px;
+}
+
+#button:hover{
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+    font-weight: bold !important;
+    color: #ffcc01;
+    border-width: 3px;
+    border-color: #ffcc01;
+}
+
+#name{
+    font-family: 'VT323', monospace !important;
+}
