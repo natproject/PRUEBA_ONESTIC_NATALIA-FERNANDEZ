@@ -12,14 +12,13 @@ export class DataService {
   constructor(public http: HttpClient) { }
 
   public url: string = "https://pokeapi.co/api/v2/pokemon/";
-  
 
-  public getResponse(): Observable<Response> {
-    return this.http.get<Response>(this.url);
+  public getResponse(offset: number, limit: number): Observable<Response> {
+    return this.http.get<Response>(`${this.url}?offset=${offset}&limit=${limit}`);
   }
 
   public getDetail(name: string|null): Observable<ResponseImages> {
-    return this.http.get<ResponseImages>(this.url+name);
+    return this.http.get<ResponseImages>(`${this.url}${name}`);
   }
 
 }

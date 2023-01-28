@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row text-center">
-
     <div class="col mt-2">
       <a [routerLink]="['list']"><button id="button" type="button" class="btn btn-lg btn-outline"> <i
             class="fa-solid fa-border-all"></i> GRID VIEW </button></a>
@@ -17,6 +16,9 @@
   </div>
 </div>
 <div class="container mt-5">
+  <mat-paginator [length]="totalPokemons" [pageSize]="20"
+    (page)="getPokemons($event.pageIndex)">
+  </mat-paginator>
   <div *ngFor="let item of arrayPokemons" class="row text-center">
     <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
       <div class="card" style="width: 18rem; display:inline-block;">
@@ -41,4 +43,5 @@
       </div>
     </div>
   </div>
+  
 </div>
