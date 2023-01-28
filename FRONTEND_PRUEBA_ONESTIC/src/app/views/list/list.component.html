@@ -19,13 +19,13 @@
   </div>
 </div>
 
-<!--CONTENT GRID
-<div class="container mt-3">
+<!--CONTENT GRID-->
+<div *ngIf="showGrid; else elseTemp" class="container mt-3">
   <div *ngFor="let item of arrayPokemons" class="row text-center">
     <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
       <div class="card" style="width: 15rem; display:inline-block;">
         <div class="card-header">
-          <h1 id="name" class="card-title text-capitalize">{{element.id}} - {{element.namePokemon}}</h1>
+          <h1 id="name" class="card-title text-capitalize">{{element.namePokemon}}</h1>
         </div>
         <img class="card-img-top" style="width: 70%;" src="{{element.img}}">
         <div class="card-footer">
@@ -47,9 +47,10 @@
   </div>
   <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
   </mat-paginator>
-</div>-->
+</div>
 
 <!--CONTENT LIST-->
+<ng-template #elseTemp>
 <div class="container mt-3">
   <div *ngFor="let item of arrayPokemons">
     <div *ngFor="let element of item; index as i" class="row">
@@ -59,7 +60,7 @@
           <div class="card-header">
             <div class="row">
               <div class="col-6">
-                <h1 id="name" class="text-capitalize">{{element.id}} - {{element.namePokemon}}</h1>
+                <h1 id="name" class="text-capitalize">{{element.namePokemon}}</h1>
               </div>
               <div class="col-6">
                 <div class="text-end">
@@ -76,7 +77,7 @@
                 <img style="width: 100%;" src="{{element.img}}">
               </div>
               <div class="col-8">
-                <h3 class="bold">Pokemon Number {{element.id}}</h3>
+                <h3 class="bold text-capitalize">Pokemon Name: {{element.namePokemon}}</h3>
                 <h4>For more information about {{element.namePokemon}} see the details by clicking below</h4>
                 <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
               </div>
@@ -87,4 +88,7 @@
       <div class="col-2"> </div>
     </div>
   </div>
+    <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
+  </mat-paginator>
 </div>
+</ng-template>

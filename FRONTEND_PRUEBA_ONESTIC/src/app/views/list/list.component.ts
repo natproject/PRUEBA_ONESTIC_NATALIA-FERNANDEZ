@@ -18,7 +18,6 @@ export class ListComponent {
   public pokemonsId: string[] = [];
   public showGrid: boolean = true;
 
-
   constructor(public service: DataService) { }
 
   ngOnInit() {
