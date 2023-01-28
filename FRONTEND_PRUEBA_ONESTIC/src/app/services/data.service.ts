@@ -21,4 +21,11 @@ export class DataService {
     return this.http.get<ResponseImages>(`${this.url}${name}`);
   }
 
+  public getDetailById(id: number):Observable<ResponseImages> {
+    return this.http.get<ResponseImages>(`${this.url}${id}`);
+  }
+
+  public getAll():Observable<Response> {
+    return this.http.get<Response>(this.url);
+  }
 }

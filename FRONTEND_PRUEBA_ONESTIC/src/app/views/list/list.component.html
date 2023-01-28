@@ -1,41 +1,41 @@
+<!--BUTTONS-->
 <div class="container">
   <div class="row text-center">
-    <div class="col mt-2">
-      <a [routerLink]="['list']"><button id="button" type="button" class="btn btn-lg btn-outline"> <i
-            class="fa-solid fa-border-all"></i> GRID VIEW </button></a>
+    <div *ngIf="showGrid; else elseBlock"class="col-6">
+      <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i class="fa-solid fa-border-all"></i> GRID VIEW </button>
     </div>
-    <div class="col mt-2">
-      <button id="button" type="button" class="btn btn-lg btn-outline"> <i class="fa-solid fa-list-ul"></i> LIST VIEW
+    <ng-template #elseBlock>
+      <div class="col-6">
+        <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i class="fa-solid fa-list-ul"></i> LIST VIEW
+        </button>
+      </div>
+    </ng-template>
+    <div class="col-6">
+      <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
       </button>
     </div>
-    <div class="col mt-2">
-      <button id="button" type="button" class="btn btn-lg btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
-      </button>
-    </div>
-
   </div>
 </div>
-<div class="container mt-5">
-  <mat-paginator [length]="totalPokemons" [pageSize]="20"
-    (page)="getPokemons($event.pageIndex)">
-  </mat-paginator>
+
+<!--CONTENT GRID-->
+<div class="container mt-3">
   <div *ngFor="let item of arrayPokemons" class="row text-center">
     <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
-      <div class="card" style="width: 18rem; display:inline-block;">
+      <div class="card" style="width: 15rem; display:inline-block;">
         <div class="card-header">
-          <h2 id="name" class="card-title text-capitalize">{{element.namePokemon}}</h2>
+          <h1 id="name" class="card-title text-capitalize">{{element.namePokemon}}</h1>
         </div>
-        <img class="card-img-top" src="{{element.img}}">
+        <img class="card-img-top" style="width: 70%;"src="{{element.img}}">
         <div class="card-footer">
           <div class="row">
             <div class="col-6">
-              <a href="#" id="button" class="btn" [routerLink]="['/detail', element.namePokemon]">Details</a>
+              <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
             </div>
             <div class="col-6">
               <div class="text-end">
                 <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off">
-                <label class="btn btn-outline-warning" for="{{element.namePokemon}}"><i
-                    class="fa-solid fa-star"></i></label><br>
+                <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
+                    class="fa-solid fa-star"></i></label>
               </div>
             </div>
           </div>
@@ -43,5 +43,20 @@
       </div>
     </div>
   </div>
-  
+  <mat-paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
+  </mat-paginator>
 </div>
+
+<!--CONTENT LIST
+<div class="container mt-2">
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>-->
