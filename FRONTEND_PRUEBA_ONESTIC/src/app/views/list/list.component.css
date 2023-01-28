@@ -55,5 +55,9 @@
 }
 
 .mat-mdc-paginator{
-  font-size: larger;
+  font-size: 20px;
+}
+
+.bold{
+  font-weight: bold !important;
 }

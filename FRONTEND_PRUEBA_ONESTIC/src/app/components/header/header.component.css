@@ -1,5 +1,6 @@
 img{
     width: 500px;
+    cursor: pointer;
 }
 h2{
     font-family: 'Tillana', serif !important;
