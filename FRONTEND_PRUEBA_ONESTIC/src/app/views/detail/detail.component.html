@@ -17,10 +17,11 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                <label class="btn btn-outline-warning" for="btn-check-outlined"><i
-                                        class="fa-solid fa-star"></i></label><br>
-                            </div>
+                                <input type="checkbox" class="btn-check" id="{{name}}" autocomplete="off"
+                                  (click)="save(name)" [checked]=isFav>
+                                <label id="circle" class="btn btn-outline-warning mt-1" for="{{name}}"><i
+                                    class="fa-solid fa-star"></i></label>
+                              </div>
                         </div>
                     </div>
                 </div>

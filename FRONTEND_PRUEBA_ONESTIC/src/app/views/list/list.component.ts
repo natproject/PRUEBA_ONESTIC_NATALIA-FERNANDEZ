@@ -61,24 +61,24 @@ export class ListComponent {
     })
   }
 
-  public changeDisplay(){
+  public changeDisplay() {
     window.scrollTo(0, 0);
     (this.showGrid === 1) ? this.showGrid = 2 : this.showGrid = 1;
   }
 
   public save(nombrePokemon: string) {
-    if(localStorage.getItem(nombrePokemon)){
+    if (localStorage.getItem(nombrePokemon)) {
       localStorage.removeItem(nombrePokemon);
       window.scrollTo(0, 0);
-    }else{
+    } else {
       localStorage.setItem(nombrePokemon, nombrePokemon);
     }
     this.arrayPokemons.forEach(item => {
       item.forEach(element => {
-          if (element.namePokemon === nombrePokemon) {
-              element.fav = !element.fav;
-          }
+        if (element.namePokemon === nombrePokemon) {
+          element.fav = !element.fav;
+        }
       });
-  });
+    });
   }
 }

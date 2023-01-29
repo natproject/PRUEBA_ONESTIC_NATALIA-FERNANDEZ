@@ -22,6 +22,7 @@ export class DetailComponent {
   public sprites: string[] = [];
   public nextRoute: string = "";
   public previousRoute: string = "";
+  public isFav: boolean = false;
 
   constructor(private route: ActivatedRoute, public service: DataService, private router: Router) {
   }
@@ -36,15 +37,16 @@ export class DetailComponent {
     this.stats = [];
     this.img = "";
     this.types = [];
-    this.getAllPokemons()
-    this.getDetailPokemon()
-    
+    this.getAllPokemons();
+    this.getDetailPokemon();
   }
 
   public getDetailPokemon(){
+    window.scrollTo(0, 0);
     let name = this.route.snapshot.paramMap.get('name');
     this.service.getDetail(name).subscribe(response => {
       this.name = response.name;
+      (localStorage.getItem(this.name)) ? this.isFav = true : this.isFav = false;
       this.id = response.id;
       let abilitiesRes = response.abilities;
       for (let i = 0; i < abilitiesRes.length; i++) {
@@ -113,5 +115,14 @@ export class DetailComponent {
     this.router.navigate(['/detail', this.previousRoute], {skipLocationChange: false}).then(() => {
       this.ngOnInit();
     });
+  }
+
+  public save(nombrePokemon: string) {
+    if (localStorage.getItem(nombrePokemon)) {
+      localStorage.removeItem(nombrePokemon);
+      window.scrollTo(0, 0);
+    } else {
+      localStorage.setItem(nombrePokemon, nombrePokemon);
+    }
   }
 }
