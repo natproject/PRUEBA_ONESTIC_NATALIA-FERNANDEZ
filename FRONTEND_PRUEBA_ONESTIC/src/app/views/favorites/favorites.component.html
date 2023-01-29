@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="container mt-3">
+    <div id="centrar" class="container mt-3">
       <div *ngFor="let item of arrayFavs" class="row text-center">
         <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
           <div class="card" style="width: 15rem; display:inline-block;">
@@ -30,7 +30,8 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-6">
-                  <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.name]">Details</a>
+                  <a href="#" id="button" class="btn btn-sm"
+                    [routerLink]="['/detail', element.name, darkTheme]">Details</a>
                 </div>
                 <div class="col-6">
                   <div class="text-end">
@@ -89,7 +90,8 @@
                   <div class="col-8">
                     <h3 class="bold text-capitalize">Pokemon Name: {{element.name}}</h3>
                     <h4>For more information about {{element.name}} see the details by clicking below</h4>
-                    <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.name]">Details</a>
+                    <a href="#" id="button" class="btn btn-sm"
+                      [routerLink]="['/detail', element.name, darkTheme]">Details</a>
                   </div>
                 </div>
               </div>

@@ -49,7 +49,7 @@ export class FavoritesComponent {
     }
     let names = Object.keys(localStorage);
     names.forEach(name => {
-      if (!name.endsWith(".img")) {
+      if (!name.endsWith(".img") && !name.endsWith("mode")) {
         this.namesFav.push(name);
       }
     });
