@@ -1,94 +1,102 @@
-<!--BUTTONS-->
-<div class="container">
-  <div class="row text-center">
-    <div *ngIf="showGrid; else elseBlock" class="col-6">
-      <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
-          class="fa-solid fa-border-all"></i> GRID VIEW </button>
-    </div>
-    <ng-template #elseBlock>
-      <div class="col-6">
-        <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
-            class="fa-solid fa-list-ul"></i> LIST VIEW
-        </button>
-      </div>
-    </ng-template>
-    <div class="col-6">
-      <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
-      </button>
-    </div>
-  </div>
-</div>
-
-<!--CONTENT GRID-->
-<div *ngIf="showGrid; else elseTemp" class="container mt-3">
-  <div *ngFor="let item of arrayPokemons" class="row text-center">
-    <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
-      <div class="card" style="width: 15rem; display:inline-block;">
-        <div class="card-header">
-          <h1 id="name" class="card-title text-capitalize">{{element.namePokemon}}</h1>
+<div [ngSwitch]="showGrid">
+  <div *ngSwitchCase="1">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
+              class="fa-solid fa-list-ul"></i> LIST VIEW </button>
         </div>
-        <img class="card-img-top" style="width: 70%;" src="{{element.img}}">
-        <div class="card-footer">
-          <div class="row">
-            <div class="col-6">
-              <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
-            </div>
-            <div class="col-6">
-              <div class="text-end">
-                <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off">
-                <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
-                    class="fa-solid fa-star"></i></label>
-              </div>
-            </div>
-          </div>
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
+          </button>
         </div>
       </div>
     </div>
-  </div>
-  <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
-  </mat-paginator>
-</div>
-
-<!--CONTENT LIST-->
-<ng-template #elseTemp>
-<div class="container mt-3">
-  <div *ngFor="let item of arrayPokemons">
-    <div *ngFor="let element of item; index as i" class="row">
-      <div class="col-2"> </div>
-      <div class="col-8">
-        <div class="card mb-3">
-          <div class="card-header">
-            <div class="row">
-              <div class="col-6">
-                <h1 id="name" class="text-capitalize">{{element.namePokemon}}</h1>
-              </div>
-              <div class="col-6">
-                <div class="text-end">
-                  <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                  <label class="btn btn-outline-warning" for="btn-check-outlined"><i
-                      class="fa-solid fa-star"></i></label>
+    <div class="container mt-3">
+      <div *ngFor="let item of arrayPokemons" class="row text-center">
+        <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
+          <div class="card" style="width: 15rem; display:inline-block;">
+            <div class="card-header">
+              <h1 id="name" class="card-title text-capitalize">{{element.namePokemon}}</h1>
+            </div>
+            <img class="card-img-top" style="width: 70%;" src="{{element.img}}">
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
+                </div>
+                <div class="col-6">
+                  <div class="text-end">
+                    <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off"
+                      (click)="save(element.namePokemon)" [checked]=element.fav>
+                    <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
+                        class="fa-solid fa-star"></i></label>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-2">
-                <img style="width: 100%;" src="{{element.img}}">
+        </div>
+      </div>
+      <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="2">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
+              class="fa-solid fa-border-all"></i> GRID VIEW </button>
+        </div>
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-3">
+      <div *ngFor="let item of arrayPokemons">
+        <div *ngFor="let element of item; index as i" class="row">
+          <div class="col-2"> </div>
+          <div class="col-8">
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-6">
+                    <h1 id="name" class="text-capitalize">{{element.namePokemon}}</h1>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-end">
+                      <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off"
+                        (click)="save(element.namePokemon)" [checked]=element.fav>
+                      <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
+                          class="fa-solid fa-star"></i></label>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-8">
-                <h3 class="bold text-capitalize">Pokemon Name: {{element.namePokemon}}</h3>
-                <h4>For more information about {{element.namePokemon}} see the details by clicking below</h4>
-                <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img style="width: 100%;" src="{{element.img}}">
+                  </div>
+                  <div class="col-8">
+                    <h3 class="bold text-capitalize">Pokemon Name: {{element.namePokemon}}</h3>
+                    <h4>For more information about {{element.namePokemon}} see the details by clicking below</h4>
+                    <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <div class="col-2"> </div>
         </div>
       </div>
-      <div class="col-2"> </div>
+      <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
+      </mat-paginator>
     </div>
   </div>
-    <mat-paginator #paginator [length]="totalPokemons" [pageSize]="20" (page)="start($event.pageIndex)">
-  </mat-paginator>
 </div>
-</ng-template>
+
