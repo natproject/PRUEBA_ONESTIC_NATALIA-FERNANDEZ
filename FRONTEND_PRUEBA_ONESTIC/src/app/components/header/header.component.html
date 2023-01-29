@@ -1,8 +1,11 @@
-<div class="container mt-5">
-    <div class="row text-center">
-        <div class="col-xl-12 mb-1" [routerLink]="['/list']">
-            <img style="width: 30%"src={{img}}>
-            <h2>REGIÓN SINNOH</h2>
+<div [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-xl-12 mb-1" [routerLink]="['/list']">
+                <img style="width: 30%"src={{img}}>
+                <h2 [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">REGIÓN SINNOH</h2>
+            </div>
         </div>
     </div>
+    
 </div>

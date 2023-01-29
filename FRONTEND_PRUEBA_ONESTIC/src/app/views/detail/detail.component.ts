@@ -23,6 +23,7 @@ export class DetailComponent {
   public nextRoute: string = "";
   public previousRoute: string = "";
   public isFav: boolean = false;
+  public darkTheme: boolean = false;
 
   constructor(private route: ActivatedRoute, public service: DataService, private router: Router) {
   }
@@ -43,6 +44,16 @@ export class DetailComponent {
 
   public getDetailPokemon(){
     window.scrollTo(0, 0);
+    let dark = this.route.snapshot.paramMap.get('dark');
+    switch (dark) {
+      case 'true':
+        this.darkTheme = true;
+        break;
+
+      case 'false':
+        this.darkTheme = false;
+        break;
+    }
     let name = this.route.snapshot.paramMap.get('name');
     this.service.getDetail(name).subscribe(response => {
       this.name = response.name;
@@ -106,13 +117,13 @@ export class DetailComponent {
   }
 
   public next(){
-    this.router.navigate(['/detail', this.nextRoute], {skipLocationChange: false}).then(() => {
+    this.router.navigate(['/detail', this.nextRoute, this.darkMode], {skipLocationChange: false}).then(() => {
       this.ngOnInit();
     });
   }
 
   public previous(){
-    this.router.navigate(['/detail', this.previousRoute], {skipLocationChange: false}).then(() => {
+    this.router.navigate(['/detail', this.previousRoute, this.darkMode], {skipLocationChange: false}).then(() => {
       this.ngOnInit();
     });
   }
@@ -124,5 +135,9 @@ export class DetailComponent {
     } else {
       localStorage.setItem(nombrePokemon, nombrePokemon);
     }
+  }
+
+    public darkMode(): void{
+    (this.darkTheme === true) ? this.darkTheme = false : this.darkTheme = true
   }
 }

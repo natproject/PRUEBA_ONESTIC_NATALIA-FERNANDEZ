@@ -1,15 +1,16 @@
-<div class="container">
+<app-header [darkTheme]="darkTheme"></app-header>
+<div class="container-fluid" [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
     <div class="row text-center mb-2">
-        <div class="col-6 text-start">
+        <div class="col-6">
             <button id="button" type="button" class="btn btn-sm btn-outline" (click)="previous()">Previous</button>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-6">
             <button id="button" type="button" class="btn btn-sm btn-outline" (click)="next()">Next</button>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <div class="card">
+        <div class="col-12" >
+            <div id="centrar" class="card" style="width:80%">
                 <div class="card-header">
                     <div class="row mt-2">
                         <div class="col-6">
@@ -53,7 +54,7 @@
                                         <h4>Abilities:</h4>
                                         <h4 *ngFor="let item of abilities" id="res">- {{item}}</h4>
                                     </div>
-                                    <div id="margin" class="col text-center">
+                                    <div id="marginAbilities" class="col text-center">
                                         <h4>Stats:</h4>
                                         <h4>
                                             <h4 id="res" *ngFor="let item of stats; let i = index">

@@ -1,0 +1,104 @@
+<app-header [darkTheme]="darkTheme"></app-header>
+
+<div [ngSwitch]="display">
+
+  <!--GRID VIEW-->
+  <div *ngSwitchCase="1" [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
+    <div class="container mb-5">
+      <div class="row text-center">
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline" [routerLink]="['']"> SHOW ALL </button>
+        </div>
+        <div class="col-6">
+          <button *ngIf="!darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i
+              class="fa-solid fa-moon"></i> DARK MODE
+          </button>
+          <button *ngIf="darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i
+              class="fa-solid fa-sun"></i> LIGHT MODE
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-3">
+      <div *ngFor="let item of arrayFavs" class="row text-center">
+        <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
+          <div class="card" style="width: 15rem; display:inline-block;">
+            <div class="card-header">
+              <h1 id="name" class="card-title text-capitalize">{{element.name}}</h1>
+            </div>
+            <img class="card-img-top" style="width: 70%;" src="{{element.img}}">
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.name]">Details</a>
+                </div>
+                <div class="col-6">
+                  <div class="text-end">
+                    <input type="checkbox" class="btn-check" id="{{element.name}}" autocomplete="off"
+                      (click)="delete(element.name, element.img)" checked>
+                    <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.name}}"><i
+                        class="fa-solid fa-star"></i></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--LIST VIEW-->
+  <div *ngSwitchCase="2" [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline" [routerLink]="['']"> SHOW ALL </button>
+        </div>
+        <div class="col-6">
+          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-3">
+      <div *ngFor="let item of arrayFavs">
+        <div *ngFor="let element of item; index as i" class="row">
+          <div class="col-2"> </div>
+          <div class="col-8">
+            <div class="card mb-3">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-6">
+                    <h1 id="name" class="text-capitalize">{{element.name}}</h1>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-end">
+                      <input type="checkbox" class="btn-check" id="{{element.name}}" autocomplete="off" checked>
+                      <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.name}}"><i
+                          class="fa-solid fa-star"></i></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <img style="width: 100%;" src="{{element.img}}">
+                  </div>
+                  <div class="col-8">
+                    <h3 class="bold text-capitalize">Pokemon Name: {{element.name}}</h3>
+                    <h4>For more information about {{element.name}} see the details by clicking below</h4>
+                    <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.name]">Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2"> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

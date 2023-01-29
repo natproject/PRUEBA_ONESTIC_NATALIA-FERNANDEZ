@@ -9,13 +9,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { ListComponent } from './views/list/list.component';
 import { DetailComponent } from './views/detail/detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FavoritesComponent } from './views/favorites/favorites.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ListComponent,
-    DetailComponent
+    DetailComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

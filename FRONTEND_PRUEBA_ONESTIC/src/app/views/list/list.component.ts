@@ -18,6 +18,7 @@ export class ListComponent {
   public pokemonsId: string[] = [];
   public showGrid: number = 1;
   public isFav: boolean[] = [];
+  public darkTheme: boolean = false;
 
   constructor(public service: DataService) { }
 
@@ -27,6 +28,7 @@ export class ListComponent {
 
   public start(pageIndex: number) {
     window.scrollTo(0, 0);
+    (localStorage.getItem('mode') === 'true') ? this.darkTheme = true : this.darkTheme = false;
     this.pokemonsUrl = [];
     this.pokemonsName = [];
     this.pokemonsImg = [];
@@ -50,7 +52,6 @@ export class ListComponent {
           this.isFav.push(false)
         }
       }
-      console.log(this.isFav)
       this.arrayPokemons = [
         [{ img: this.pokemonsImg[0], namePokemon: this.pokemonsName[0], fav: this.isFav[0] }, { img: this.pokemonsImg[1], namePokemon: this.pokemonsName[1], fav: this.isFav[1] }, { img: this.pokemonsImg[2], namePokemon: this.pokemonsName[2], fav: this.isFav[2] }, { img: this.pokemonsImg[3], namePokemon: this.pokemonsName[3], fav: this.isFav[3] }],
         [{ img: this.pokemonsImg[4], namePokemon: this.pokemonsName[4], fav: this.isFav[4] }, { img: this.pokemonsImg[5], namePokemon: this.pokemonsName[5], fav: this.isFav[5] }, { img: this.pokemonsImg[6], namePokemon: this.pokemonsName[6], fav: this.isFav[6] }, { img: this.pokemonsImg[7], namePokemon: this.pokemonsName[7], fav: this.isFav[7] }],
@@ -61,17 +62,19 @@ export class ListComponent {
     })
   }
 
-  public changeDisplay() {
+  public changeDisplay(num: number) {
     window.scrollTo(0, 0);
-    (this.showGrid === 1) ? this.showGrid = 2 : this.showGrid = 1;
+    this.showGrid = num;
   }
 
-  public save(nombrePokemon: string) {
+  public save(nombrePokemon: string, img: string) {
     if (localStorage.getItem(nombrePokemon)) {
       localStorage.removeItem(nombrePokemon);
+      localStorage.removeItem(nombrePokemon+'.img');
       window.scrollTo(0, 0);
     } else {
       localStorage.setItem(nombrePokemon, nombrePokemon);
+      localStorage.setItem(nombrePokemon+'.img', img);
     }
     this.arrayPokemons.forEach(item => {
       item.forEach(element => {
@@ -81,4 +84,15 @@ export class ListComponent {
       });
     });
   }
+
+  public darkMode():void{
+    if(localStorage.getItem('mode') === 'true'){
+      this.darkTheme = false;
+      localStorage.setItem('mode', 'false');
+    }else{
+      this.darkTheme = true;
+      localStorage.setItem('mode', 'true');
+    }
+  }
+
 }

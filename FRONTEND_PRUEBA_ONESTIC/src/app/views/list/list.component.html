@@ -1,14 +1,23 @@
-<div [ngSwitch]="showGrid">
+<app-header [darkTheme]="darkTheme"></app-header>
+<div [ngSwitch]="showGrid" [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
+
+  <!--GRID VIEW-->
   <div *ngSwitchCase="1">
     <div class="container">
       <div class="row text-center">
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
+        <div class="col-4">
+          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay(2)"> <i
               class="fa-solid fa-list-ul"></i> LIST VIEW </button>
         </div>
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
+        <div class="col-4">
+          <button *ngIf="!darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-moon"></i> DARK MODE
           </button>
+          <button *ngIf="darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-sun"></i> LIGHT MODE
+          </button>
+        </div>
+        <div class="col-4">
+          <button id="button" type="button" class="btn btn-outline" [routerLink]="['/favorites', 'grid', darkTheme]"> <i
+              class="fa-solid fa-star"></i> FAVORITES </button>
         </div>
       </div>
     </div>
@@ -23,12 +32,12 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-6">
-                  <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
+                  <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon, darkTheme]">Details</a>
                 </div>
                 <div class="col-6">
                   <div class="text-end">
                     <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off"
-                      (click)="save(element.namePokemon)" [checked]=element.fav>
+                      (click)="save(element.namePokemon, element.img)" [checked]=element.fav>
                     <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
                         class="fa-solid fa-star"></i></label>
                   </div>
@@ -43,16 +52,23 @@
     </div>
   </div>
 
+  <!--LIST VIEW-->
   <div *ngSwitchCase="2">
     <div class="container">
       <div class="row text-center">
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay()"> <i
+        <div class="col-4">
+          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay(1)"> <i
               class="fa-solid fa-border-all"></i> GRID VIEW </button>
         </div>
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
+        <div class="col-4">
+          <button *ngIf="!darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-moon"></i> DARK MODE
           </button>
+          <button *ngIf="darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-sun"></i> LIGHT MODE
+          </button>
+        </div>
+        <div class="col-4">
+          <button id="button" type="button" class="btn btn-outline" [routerLink]="['/favorites', 'list', darkTheme]"> <i
+              class="fa-solid fa-star"></i> FAVORITES </button>
         </div>
       </div>
     </div>
@@ -70,7 +86,7 @@
                   <div class="col-6">
                     <div class="text-end">
                       <input type="checkbox" class="btn-check" id="{{element.namePokemon}}" autocomplete="off"
-                        (click)="save(element.namePokemon)" [checked]=element.fav>
+                        (click)="save(element.namePokemon, element.img)" [checked]=element.fav>
                       <label id="circle" class="btn btn-outline-warning mt-1" for="{{element.namePokemon}}"><i
                           class="fa-solid fa-star"></i></label>
                     </div>
@@ -85,7 +101,7 @@
                   <div class="col-8">
                     <h3 class="bold text-capitalize">Pokemon Name: {{element.namePokemon}}</h3>
                     <h4>For more information about {{element.namePokemon}} see the details by clicking below</h4>
-                    <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon]">Details</a>
+                    <a href="#" id="button" class="btn btn-sm" [routerLink]="['/detail', element.namePokemon, darkTheme]">Details</a>
                   </div>
                 </div>
               </div>
@@ -98,5 +114,6 @@
       </mat-paginator>
     </div>
   </div>
+
 </div>
 

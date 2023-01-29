@@ -5,3 +5,11 @@ img{
 h2{
     font-family: 'Tillana', serif !important;
 }
+.dark-theme{
+    background-color: black;
+    color:white;
+  }
+  
+.light-theme{
+    background-color: rgba(255, 245, 245, 0.116);;
+  }

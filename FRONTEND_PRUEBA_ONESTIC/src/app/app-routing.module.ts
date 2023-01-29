@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './views/list/list.component';
 import { DetailComponent } from './views/detail/detail.component';
+import { FavoritesComponent } from './views/favorites/favorites.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'list', pathMatch:'full' },
   { path: 'list', component: ListComponent},
-  { path: 'detail/:name', component: DetailComponent},
+  { path: 'detail/:name/:dark', component: DetailComponent},
+  { path: 'favorites/:type/:dark', component: FavoritesComponent}
+
 ];
 
 @NgModule({
