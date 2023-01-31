@@ -8,8 +8,6 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ListComponent {
   public pokemons = [];
-  public pageIndex: number = 0;
-  public totalPokemons = 0;
   public counter: number = 0;
   public pokemonsName: string[] = [];
   public pokemonsUrl: string[] = [];
@@ -17,9 +15,12 @@ export class ListComponent {
   public arrayPokemons: { img: string, namePokemon: string, fav: boolean }[][] = [[{ img: '', namePokemon: '', fav: false }]];
   public pokemonsId: string[] = [];
   public isFav: boolean[] = [];
-  //public darkTheme: boolean = false;
   @Input() darkTheme: boolean = false;
   @Input() showGrid: number = 1;
+  public pageIndex: number = 0;
+  public totalPokemons = 0;
+  public totalPages = 0;
+  public pokemonsPerPage = 20
 
   constructor(public service: DataService) { }
 
@@ -28,15 +29,16 @@ export class ListComponent {
   }
 
   public start(pageIndex: number) {
+    console.log(pageIndex)
     window.scrollTo(0, 0);
-    (localStorage.getItem('mode') === 'true') ? this.darkTheme = true : this.darkTheme = false;
     this.pokemonsUrl = [];
     this.pokemonsName = [];
     this.pokemonsImg = [];
     this.isFav = [];
-    this.service.getResponse(pageIndex * 20, 20).subscribe(response => {
+    this.service.getResponse(pageIndex * this.pokemonsPerPage, this.pokemonsPerPage).subscribe(response => {
       this.counter = response.results.length;
       this.totalPokemons = response.count;
+      this.totalPages = 63;
       for (let i = 0; i < this.counter; i++) {
         this.pokemonsName.push(response.results[i].name);
         this.pokemonsUrl.push(response.results[i].url)
@@ -63,11 +65,6 @@ export class ListComponent {
     })
   }
 
-  /*public changeDisplay(num: number) {
-    window.scrollTo(0, 0);
-    this.showGrid = num;
-  }*/
-
   public save(nombrePokemon: string, img: string) {
     if (localStorage.getItem(nombrePokemon)) {
       localStorage.removeItem(nombrePokemon);
@@ -86,14 +83,21 @@ export class ListComponent {
     });
   }
 
-  /*public darkMode():void{
-    if(localStorage.getItem('mode') === 'true'){
-      this.darkTheme = false;
-      localStorage.setItem('mode', 'false');
+  public next(index: number){
+    index++;
+    this.pageIndex = index;
+    this.start(this.pageIndex);
+  }
+
+  public previous(index: number){
+    if(index === 0){
+      this.pageIndex = this.totalPages
+      this.start(this.pageIndex);
     }else{
-      this.darkTheme = true;
-      localStorage.setItem('mode', 'true');
+      index--;
+      this.pageIndex = index;
+      this.start(this.pageIndex);
     }
-  }*/
+  }
 
 }
