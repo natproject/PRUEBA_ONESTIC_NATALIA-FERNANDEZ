@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -17,9 +17,10 @@ export class ListComponent {
   public isFav: boolean[] = [];
   @Input() darkTheme: boolean = false;
   @Input() showGrid: number = 1;
+  @Output() showDetail = new EventEmitter<string>();
   public pageIndex: number = 0;
   public totalPokemons = 0;
-  public totalPages = 0;
+  public totalPages = 63;
   public pokemonsPerPage = 20
 
   constructor(public service: DataService) { }
@@ -38,7 +39,6 @@ export class ListComponent {
     this.service.getResponse(pageIndex * this.pokemonsPerPage, this.pokemonsPerPage).subscribe(response => {
       this.counter = response.results.length;
       this.totalPokemons = response.count;
-      this.totalPages = 63;
       for (let i = 0; i < this.counter; i++) {
         this.pokemonsName.push(response.results[i].name);
         this.pokemonsUrl.push(response.results[i].url)
@@ -84,9 +84,14 @@ export class ListComponent {
   }
 
   public next(index: number){
-    index++;
-    this.pageIndex = index;
-    this.start(this.pageIndex);
+    if(index === this.totalPages){
+      this.pageIndex = 0
+      this.start(this.pageIndex);
+    }else{
+      index++;
+      this.pageIndex = index;
+      this.start(this.pageIndex);
+    }
   }
 
   public previous(index: number){
@@ -98,6 +103,10 @@ export class ListComponent {
       this.pageIndex = index;
       this.start(this.pageIndex);
     }
+  }
+
+  public showInfoDetail(name: string) {
+    this.showDetail.emit(name);
   }
 
 }

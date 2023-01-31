@@ -7,8 +7,7 @@ import { FavoritesComponent } from './views/favorites/favorites.component';
 const routes: Routes = [
   { path: '', redirectTo:'list', pathMatch:'full' },
   { path: 'list', component: ListComponent},
-  { path: 'detail/:name/:dark', component: DetailComponent},
-  { path: 'favorites/:type/:dark', component: FavoritesComponent}
+
 
 ];
 

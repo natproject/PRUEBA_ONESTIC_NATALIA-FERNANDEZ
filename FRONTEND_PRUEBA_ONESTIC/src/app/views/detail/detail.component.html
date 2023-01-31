@@ -1,15 +1,7 @@
-<div class="container-fluid">
-    <div class="row text-center mb-2">
-        <div class="col-6">
-            <button id="button" type="button" class="btn btn-sm btn-outline" (click)="previous()">Previous</button>
-        </div>
-        <div class="col-6">
-            <button id="button" type="button" class="btn btn-sm btn-outline" (click)="next()">Next</button>
-        </div>
-    </div>
-    <div class="row mb-5">
+<div class="container mt-5">
+    <div class="row">
         <div class="col-12" style="height: 100%;" >
-            <div id="centrar" class="card" style="width:80%">
+            <div class="card" >
                 <div class="card-header">
                     <div class="row mt-2">
                         <div class="col-6">
@@ -74,6 +66,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6 text-start">
+            <button id="button" type="button" class="btn btn-sm btn-outline" (click)="previous(id)">Previous</button>
+        </div>
+        <div class="col-6 text-end">
+            <button id="button" type="button" class="btn btn-sm btn-outline" (click)="next(id)">Next</button>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,17 +7,38 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   public img: string = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/2560px-International_Pok%C3%A9mon_logo.svg.png";
-  //@Input() darkTheme: boolean = false;
   public darkTheme: boolean = false;
   public showGrid: number = 1;
+  public display: number = 1;
+  public disabledButton: boolean = false;
+  public pokemonNameDetail: string = "";
 
   public darkMode(bool: boolean):void{
     this.darkTheme = bool;
   }
 
-  public changeDisplay(num: number) {
+  public changeDisplay(num: number): void{
     window.scrollTo(0, 0);
     this.showGrid = num;
   }
 
+  public showInfoDetail(name: string): void{
+    this.disabledButton = true;
+    this.display = 2;
+    this.pokemonNameDetail = name;
+  }
+
+  public showAll(): void{
+    this.disabledButton = false;
+    this.display = 1;
+    this.pokemonNameDetail = "";
+  }
+
+  public next(name: string): void {
+    this.pokemonNameDetail = name;
+  }
+
+  public previous(name: string): void {
+    this.pokemonNameDetail = name;
+  }
 }

@@ -1,24 +1,26 @@
-<div
-    [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
+<div [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
     <div class="container">
         <div class="row text-center">
-            <div class="col-xl-12 mb-1" [routerLink]="['/list']">
+            <div class="col-xl-12 mb-1" [routerLink]="['list']">
                 <img style="width: 30%" src={{img}}>
                 <h2 [ngStyle]="darkTheme ? {'color': 'white'} : {'color': 'black'}">REGIÓN SINNOH</h2>
             </div>
         </div>
     </div>
 
-    <div class="container"
-        [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
+    <div class="container" [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
         <div class="row text-center">
-            <div class="col-4">
+            <div *ngIf="disabledButton == false" class="col-4">
                 <button *ngIf="showGrid == 1" id="button" type="button" class="btn btn-outline"
                     (click)="changeDisplay(2)">
                     <i class="fa-solid fa-list-ul"></i> LIST VIEW </button>
                 <button *ngIf="showGrid == 2" id="button" type="button" class="btn btn-outline"
                     (click)="changeDisplay(1)">
                     <i class="fa-solid fa-border-all"></i> GRID VIEW </button>
+            </div>
+            <div *ngIf="disabledButton == true" class="col-4">
+                <button *ngIf="showGrid == 1" id="button" type="button" class="btn btn-outline"
+                    (click)="showAll()"> SHOW ALL </button>
             </div>
             <div class="col-4">
                 <button *ngIf="darkTheme == false" id="button" type="button" class="btn btn-outline"
@@ -30,10 +32,17 @@
             </div>
             <div class="col-4">
                 <button id="button" type="button" class="btn btn-outline"
-                    [routerLink]="['/favorites', 'grid', darkTheme]">
+                    [routerLink]="['/favorites', 'grid']">
                     <i class="fa-solid fa-star"></i> FAVORITES </button>
             </div>
         </div>
     </div>
-    <app-list [darkTheme]="darkTheme" [showGrid]="showGrid"></app-list>
+    <div [ngSwitch]="display">
+        <div *ngSwitchCase="1">
+            <app-list (showDetail)="showInfoDetail($event)" [darkTheme]="darkTheme" [showGrid]="showGrid"></app-list>
+        </div>
+        <div *ngSwitchCase="2">
+            <app-detail (nextPokemon)="next($event)" (previousPokemon)="previous($event)" [darkTheme]="darkTheme" [pokemonNameDetail]="pokemonNameDetail"></app-detail>
+        </div>
+    </div>
 </div>

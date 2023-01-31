@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -9,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
+  @Input() pokemonNameDetail: string = "";
+  @Input() darkTheme: boolean = false;
   public totalPokemons: number = 0;
   public name: string = "";
   public id: number = 0;
@@ -23,13 +23,17 @@ export class DetailComponent {
   public nextRoute: string = "";
   public previousRoute: string = "";
   public isFav: boolean = false;
-  //public darkTheme: boolean = false;
 
-  constructor(private route: ActivatedRoute, public service: DataService, private router: Router) {
+  constructor(public service: DataService) {
   }
 
   public ngOnInit(): void {
-    this.name = "";
+    this.name = this.pokemonNameDetail;
+    this.getAllPokemons();
+    this.getDetailPokemon(this.name);
+  }
+
+  public getDetailPokemon(name: string) {
     this.id = 0;
     this.exp = 0;
     this.weight = 0;
@@ -38,26 +42,10 @@ export class DetailComponent {
     this.stats = [];
     this.img = "";
     this.types = [];
-    this.getAllPokemons();
-    this.getDetailPokemon();
-  }
-
-  public getDetailPokemon(){
     window.scrollTo(0, 0);
-    /*let dark = this.route.snapshot.paramMap.get('dark');
-    switch (dark) {
-      case 'true':
-        this.darkTheme = true;
-        break;
-
-      case 'false':
-        this.darkTheme = false;
-        break;
-    }*/
-    let name = this.route.snapshot.paramMap.get('name');
     this.service.getDetail(name).subscribe(response => {
       this.name = response.name;
-      (localStorage.getItem(this.name)) ? this.isFav = true : this.isFav = false;
+      (localStorage.getItem(name)) ? this.isFav = true : this.isFav = false;
       this.id = response.id;
       let abilitiesRes = response.abilities;
       for (let i = 0; i < abilitiesRes.length; i++) {
@@ -76,55 +64,57 @@ export class DetailComponent {
       }
       this.sprites = [response.sprites.front_default, response.sprites.back_default, response.sprites.front_shiny, response.sprites.back_shiny]
       this.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.id}.png`;
-      this.nextPokemon(this.id)
-      this.previousPokemon(this.id)
-      
     })
   }
 
-  public nextPokemon(id: number): void {
-    let nextId = (id+1);
-    if (nextId === 1009) {
-      this.service.getDetailById(1).subscribe(response => {
-        this.nextRoute = response.name
+  @Output() nextPokemon = new EventEmitter<string>();
+  public next(id: number) {
+    if (id === 1008) {
+      id = 1;
+      this.service.getDetailById(id).subscribe(response => {
+        let name = response.name;
+        console.log(name)
+        this.nextPokemon.emit(name)
+        this.getDetailPokemon(name)
+
       });
-    }else{
-      this.service.getDetailById(nextId).subscribe(response => {
-        this.nextRoute = response.name
+    } else {
+      id++;
+      this.service.getDetailById(id).subscribe(response => {
+        let name = response.name;
+        console.log(name)
+        this.nextPokemon.emit(name)
+        this.getDetailPokemon(name)
       });
     }
   }
 
-  public previousPokemon(id: number): void{
-    let nextId = (id-1);
-    if (nextId === 0) {
-      this.service.getDetailById(1008).subscribe(response => {
-        this.previousRoute = response.name
-        console.log(this.previousRoute)
+  @Output() previousPokemon = new EventEmitter<string>();
+  public previous(id: number) {
+    if (id === 1) {
+      id = 1008;
+      this.service.getDetailById(id).subscribe(response => {
+        let name = response.name;
+        console.log(name)
+        this.nextPokemon.emit(name)
+        this.getDetailPokemon(name)
+
       });
-    }else{
-      this.service.getDetailById(nextId).subscribe(response => {
-        this.previousRoute = response.name
+    } else {
+      id--;
+      this.service.getDetailById(id).subscribe(response => {
+        let name = response.name;
+        console.log(name)
+        this.nextPokemon.emit(name)
+        this.getDetailPokemon(name)
       });
     }
-    console.log(this.previousRoute)
   }
 
-  public getAllPokemons(){
+
+  public getAllPokemons() {
     this.service.getAll().subscribe(response => {
       this.totalPokemons = response.count;
-    });
-  }
-
-  public next(){
-    this.router.navigate(['/detail', this.nextRoute/*, this.darkMode*/], {skipLocationChange: false}).then(() => {
-      this.ngOnInit();
-    });
-  }
-
-  public previous(){
-    this.router.navigate(['/detail', this.previousRoute/*, this.darkMode*/], {skipLocationChange: false}).then(() => {
-      this.ngOnInit();
     });
   }
 
@@ -136,8 +126,4 @@ export class DetailComponent {
       localStorage.setItem(nombrePokemon, nombrePokemon);
     }
   }
-
-    /*public darkMode(): void{
-    (this.darkTheme === true) ? this.darkTheme = false : this.darkTheme = true
-  }*/
 }
