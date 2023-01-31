@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -16,9 +16,10 @@ export class ListComponent {
   public pokemonsImg: string[] = [];
   public arrayPokemons: { img: string, namePokemon: string, fav: boolean }[][] = [[{ img: '', namePokemon: '', fav: false }]];
   public pokemonsId: string[] = [];
-  public showGrid: number = 1;
   public isFav: boolean[] = [];
-  public darkTheme: boolean = false;
+  //public darkTheme: boolean = false;
+  @Input() darkTheme: boolean = false;
+  @Input() showGrid: number = 1;
 
   constructor(public service: DataService) { }
 
@@ -62,10 +63,10 @@ export class ListComponent {
     })
   }
 
-  public changeDisplay(num: number) {
+  /*public changeDisplay(num: number) {
     window.scrollTo(0, 0);
     this.showGrid = num;
-  }
+  }*/
 
   public save(nombrePokemon: string, img: string) {
     if (localStorage.getItem(nombrePokemon)) {
@@ -85,7 +86,7 @@ export class ListComponent {
     });
   }
 
-  public darkMode():void{
+  /*public darkMode():void{
     if(localStorage.getItem('mode') === 'true'){
       this.darkTheme = false;
       localStorage.setItem('mode', 'false');
@@ -93,6 +94,6 @@ export class ListComponent {
       this.darkTheme = true;
       localStorage.setItem('mode', 'true');
     }
-  }
+  }*/
 
 }

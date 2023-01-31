@@ -15,7 +15,7 @@ export class FavoritesComponent {
   public totalFavs: number = 0;
   public values: { name: string, img: string }[] = []
   public arrayFavs: any[][] = []
-  public darkTheme: boolean = false;
+  //public darkTheme: boolean = false;
 
   constructor(private route: ActivatedRoute, public service: DataService, private router: Router) {
   }
@@ -26,7 +26,7 @@ export class FavoritesComponent {
 
   public getFavorites(): void {
     window.scrollTo(0, 0);
-    (localStorage.getItem('mode') === 'true') ? this.darkTheme = true : this.darkTheme = false;
+   // (localStorage.getItem('mode') === 'true') ? this.darkTheme = true : this.darkTheme = false;
     let name = this.route.snapshot.paramMap.get('type');
     switch (name) {
       case 'grid':
@@ -37,7 +37,7 @@ export class FavoritesComponent {
         this.display = 2;
         break;
     }
-    let dark = this.route.snapshot.paramMap.get('dark');
+   /* let dark = this.route.snapshot.paramMap.get('dark');
     switch (dark) {
       case 'true':
         this.darkTheme = true;
@@ -46,7 +46,7 @@ export class FavoritesComponent {
       case 'false':
         this.darkTheme = false;
         break;
-    }
+    }*/
     let names = Object.keys(localStorage);
     names.forEach(name => {
       if (!name.endsWith(".img") && !name.endsWith("mode")) {
@@ -88,7 +88,7 @@ export class FavoritesComponent {
     }
   }
 
-  public darkMode(): void {
+  /*public darkMode(): void {
     if (localStorage.getItem('mode') === 'true') {
       this.darkTheme = false;
       localStorage.setItem('mode', 'false');
@@ -96,6 +96,6 @@ export class FavoritesComponent {
       this.darkTheme = true;
       localStorage.setItem('mode', 'true');
     }
-  }
+  }*/
 
 }

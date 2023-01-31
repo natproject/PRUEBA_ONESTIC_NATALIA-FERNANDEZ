@@ -45,15 +45,4 @@ h1 {
     line-height: 1.42857;
 }
 
-.dark-theme {
-    background-color: black;
-}
 
-.light-theme {
-    background-color: rgba(255, 245, 245, 0.116);
-}
-
-#centrar{
-    margin-left: 12em;
-    margin-bottom: 12em;
-}

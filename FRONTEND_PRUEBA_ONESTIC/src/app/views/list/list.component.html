@@ -1,26 +1,7 @@
-<app-header [darkTheme]="darkTheme"></app-header>
-<div [ngSwitch]="showGrid" [ngClass]="{'dark-theme': darkTheme, 'light-theme': !darkTheme}">
+<div [ngSwitch]="showGrid">
 
   <!--GRID VIEW-->
   <div *ngSwitchCase="1">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-4">
-          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay(2)"> <i
-              class="fa-solid fa-list-ul"></i> LIST VIEW </button>
-        </div>
-        <div class="col-4">
-          <button *ngIf="!darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-moon"></i> DARK MODE
-          </button>
-          <button *ngIf="darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-sun"></i> LIGHT MODE
-          </button>
-        </div>
-        <div class="col-4">
-          <button id="button" type="button" class="btn btn-outline" [routerLink]="['/favorites', 'grid', darkTheme]"> <i
-              class="fa-solid fa-star"></i> FAVORITES </button>
-        </div>
-      </div>
-    </div>
     <div class="container mt-3">
       <div *ngFor="let item of arrayPokemons" class="row text-center">
         <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
@@ -54,24 +35,6 @@
 
   <!--LIST VIEW-->
   <div *ngSwitchCase="2">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-4">
-          <button id="button" type="button" class="btn btn-outline" (click)="changeDisplay(1)"> <i
-              class="fa-solid fa-border-all"></i> GRID VIEW </button>
-        </div>
-        <div class="col-4">
-          <button *ngIf="!darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-moon"></i> DARK MODE
-          </button>
-          <button *ngIf="darkTheme" id="button" type="button" class="btn btn-outline" (click)="darkMode()"> <i class="fa-solid fa-sun"></i> LIGHT MODE
-          </button>
-        </div>
-        <div class="col-4">
-          <button id="button" type="button" class="btn btn-outline" [routerLink]="['/favorites', 'list', darkTheme]"> <i
-              class="fa-solid fa-star"></i> FAVORITES </button>
-        </div>
-      </div>
-    </div>
     <div class="container mt-3">
       <div *ngFor="let item of arrayPokemons">
         <div *ngFor="let element of item; index as i" class="row">
