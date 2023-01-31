@@ -5,19 +5,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ListComponent } from './views/list/list.component';
 import { DetailComponent } from './views/detail/detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FavoritesComponent } from './views/favorites/favorites.component';
+import { DisplayComponent } from './components/display/display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ListComponent,
     DetailComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,

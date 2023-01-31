@@ -1,7 +1,7 @@
 <div [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
     <div class="container">
         <div class="row text-center">
-            <div class="col-xl-12 mb-1" [routerLink]="['list']">
+            <div class="col-xl-12 mb-1">
                 <img style="width: 30%" src={{img}}>
                 <h2 [ngStyle]="darkTheme ? {'color': 'white'} : {'color': 'black'}">REGIÓN SINNOH</h2>
             </div>
@@ -20,7 +20,7 @@
             </div>
             <div *ngIf="disabledButton == true" class="col-4">
                 <button id="button" type="button" class="btn btn-outline"
-                    (click)="showAll()"> SHOW ALL </button>
+                    (click)="showAll()"> <img src="../../../assets/pokeball.png" class="pokeball"> SHOW ALL </button>
             </div>
             <div class="col-4">
                 <button *ngIf="darkTheme == false" id="button" type="button" class="btn btn-outline"
