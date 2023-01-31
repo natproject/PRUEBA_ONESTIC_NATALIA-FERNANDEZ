@@ -9,7 +9,7 @@
     </div>
 
     <div class="container" [ngStyle]="darkTheme ? {'background-color': 'black'} : {'background-color': 'white'}">
-        <div class="row text-center">
+        <div *ngIf="display != 3" class="row text-center">
             <div *ngIf="disabledButton == false" class="col-4">
                 <button *ngIf="showGrid == 1" id="button" type="button" class="btn btn-outline"
                     (click)="changeDisplay(2)">
@@ -19,7 +19,7 @@
                     <i class="fa-solid fa-border-all"></i> GRID VIEW </button>
             </div>
             <div *ngIf="disabledButton == true" class="col-4">
-                <button *ngIf="showGrid == 1" id="button" type="button" class="btn btn-outline"
+                <button id="button" type="button" class="btn btn-outline"
                     (click)="showAll()"> SHOW ALL </button>
             </div>
             <div class="col-4">
@@ -32,7 +32,34 @@
             </div>
             <div class="col-4">
                 <button id="button" type="button" class="btn btn-outline"
-                    [routerLink]="['/favorites', 'grid']">
+                (click)="showFavs(3)">
+                    <i class="fa-solid fa-star"></i> FAVORITES </button>
+            </div>
+        </div>
+        <div *ngIf="display == 3" class="row text-center">
+            <div class="col-3">
+                <button id="button" type="button" class="btn btn-outline"
+                    (click)="showAll()"> SHOW ALL </button>
+            </div>
+            <div class="col-3">
+                <button *ngIf="showGrid == 1" id="button" type="button" class="btn btn-outline"
+                    (click)="changeDisplay(2)">
+                    <i class="fa-solid fa-list-ul"></i> LIST VIEW </button>
+                <button *ngIf="showGrid == 2" id="button" type="button" class="btn btn-outline"
+                    (click)="changeDisplay(1)">
+                    <i class="fa-solid fa-border-all"></i> GRID VIEW </button>
+            </div>
+            <div class="col-3">
+                <button *ngIf="darkTheme == false" id="button" type="button" class="btn btn-outline"
+                    (click)="darkMode(true)"> <i class="fa-solid fa-moon"></i> DARK MODE
+                </button>
+                <button *ngIf="darkTheme == true" id="button" type="button" class="btn btn-outline"
+                    (click)="darkMode(false)"> <i class="fa-solid fa-sun"></i> LIGHT MODE
+                </button>
+            </div>
+            <div class="col-3">
+                <button id="button" type="button" class="btn btn-outline"
+                (click)="showFavs(3)">
                     <i class="fa-solid fa-star"></i> FAVORITES </button>
             </div>
         </div>
@@ -43,6 +70,9 @@
         </div>
         <div *ngSwitchCase="2">
             <app-detail (nextPokemon)="next($event)" (previousPokemon)="previous($event)" [darkTheme]="darkTheme" [pokemonNameDetail]="pokemonNameDetail"></app-detail>
+        </div>
+        <div *ngSwitchCase="3">
+            <app-favorites (showDetail)="showInfoDetail($event)" [showGrid]="showGrid" [darkTheme]="darkTheme"></app-favorites>
         </div>
     </div>
 </div>

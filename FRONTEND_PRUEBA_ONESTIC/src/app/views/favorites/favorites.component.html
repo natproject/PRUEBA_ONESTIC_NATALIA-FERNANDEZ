@@ -1,23 +1,8 @@
-<div [ngSwitch]="display">
+<div [ngSwitch]="showGrid">
 
   <!--GRID VIEW-->
-  <div *ngSwitchCase="1" >
-    <div class="container mb-5">
-      <div class="row text-center">
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline" [routerLink]="['']"> SHOW ALL </button>
-        </div>
-        <div class="col-6">
-          <button  id="button" type="button" class="btn btn-outline" > <i
-              class="fa-solid fa-moon"></i> DARK MODE
-          </button>
-          <button  id="button" type="button" class="btn btn-outline" > <i
-              class="fa-solid fa-sun"></i> LIGHT MODE
-          </button>
-        </div>
-      </div>
-    </div>
-    <div id="centrar" class="container mt-3">
+  <div *ngSwitchCase="1">
+    <div class="container vh-100 mt-3" >
       <div *ngFor="let item of arrayFavs" class="row text-center">
         <div *ngFor="let element of item; index as i" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
           <div class="card" style="width: 15rem; display:inline-block;">
@@ -28,8 +13,7 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-6">
-                  <a href="#" id="button" class="btn btn-sm"
-                    [routerLink]="['/detail', element.name]">Details</a>
+                  <a href="#" id="button" class="btn btn-sm" (click)="showInfoDetail(element.name)">Details</a>
                 </div>
                 <div class="col-6">
                   <div class="text-end">
@@ -48,18 +32,7 @@
   </div>
 
   <!--LIST VIEW-->
-  <div *ngSwitchCase="2" >
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline" [routerLink]="['']"> SHOW ALL </button>
-        </div>
-        <div class="col-6">
-          <button id="button" type="button" class="btn btn-outline"> <i class="fa-solid fa-moon"></i> DARK MODE
-          </button>
-        </div>
-      </div>
-    </div>
+  <div *ngSwitchCase="2">
     <div class="container mt-3">
       <div *ngFor="let item of arrayFavs">
         <div *ngFor="let element of item; index as i" class="row">
@@ -89,7 +62,7 @@
                     <h3 class="bold text-capitalize">Pokemon Name: {{element.name}}</h3>
                     <h4>For more information about {{element.name}} see the details by clicking below</h4>
                     <a href="#" id="button" class="btn btn-sm"
-                      [routerLink]="['/detail', element.name]">Details</a>
+                    (click)="showInfoDetail(element.name)">Details</a>
                   </div>
                 </div>
               </div>

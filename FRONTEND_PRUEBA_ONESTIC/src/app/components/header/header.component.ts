@@ -18,14 +18,13 @@ export class HeaderComponent {
   }
 
   public changeDisplay(num: number): void{
-    window.scrollTo(0, 0);
     this.showGrid = num;
   }
 
   public showInfoDetail(name: string): void{
     this.disabledButton = true;
-    this.display = 2;
     this.pokemonNameDetail = name;
+    this.display = 2;
   }
 
   public showAll(): void{
@@ -40,5 +39,10 @@ export class HeaderComponent {
 
   public previous(name: string): void {
     this.pokemonNameDetail = name;
+  }
+
+  public showFavs(display: number): void{
+    this.display = 3;
+    this.disabledButton = true;
   }
 }

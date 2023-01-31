@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 export class DetailComponent {
   @Input() pokemonNameDetail: string = "";
   @Input() darkTheme: boolean = false;
+  @Output() nextPokemon = new EventEmitter<string>();
+  @Output() previousPokemon = new EventEmitter<string>();
   public totalPokemons: number = 0;
   public name: string = "";
   public id: number = 0;
@@ -20,8 +22,6 @@ export class DetailComponent {
   public types: string[] = []
   public img: string = "";
   public sprites: string[] = [];
-  public nextRoute: string = "";
-  public previousRoute: string = "";
   public isFav: boolean = false;
 
   constructor(public service: DataService) {
@@ -67,7 +67,6 @@ export class DetailComponent {
     })
   }
 
-  @Output() nextPokemon = new EventEmitter<string>();
   public next(id: number) {
     if (id === 1008) {
       id = 1;
@@ -89,7 +88,6 @@ export class DetailComponent {
     }
   }
 
-  @Output() previousPokemon = new EventEmitter<string>();
   public previous(id: number) {
     if (id === 1) {
       id = 1008;
@@ -110,7 +108,6 @@ export class DetailComponent {
       });
     }
   }
-
 
   public getAllPokemons() {
     this.service.getAll().subscribe(response => {
