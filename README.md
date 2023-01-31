@@ -14,7 +14,7 @@ Para este proyecto he utilizado el framework Angular y he utilizado Bootstrap pa
 
 MEMORIA
 -------
-- Empece este proyecto haciendo un esquema, un pequeño diseño de como quería que quedara visualmente el listado y el grid. Entré en la documentación de PokeApi y decidí cuáles datos más relevantes y cómo los quería sacar. Creé el proyecto en Angular y comencé con el HTML y el CSS con la ayuda de BootStrap.
+- Empecé este proyecto haciendo un esquema, un pequeño diseño de como quería que quedara visualmente el listado y el grid. Entré en la documentación de PokeApi y decidí cuáles datos más relevantes y cómo los quería sacar. Creé el proyecto en Angular y comencé con el HTML y el CSS con la ayuda de BootStrap.
 - Lo segundo fue hacer las peticiones http a la Api, creando las interfaces para la respuesta a la petición. El mayor problema que tuve fue para sacar la imagen principal del pokemon. 
 - Me centré en sacar los datos de la Api en List y Detail, sin pensar mucho en el enrutamiento ni en los botones, lo que luego me dio algunos problemas.
 - Hice el primer intento de paginación con el Paginator de Angular Materials, que más tarde cambiaría ya que los estilos no terminaba de gustarme.
